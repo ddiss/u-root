@@ -194,10 +194,12 @@ func genDeps(opts ProbeOpts) (depMap, error) {
 		return nil, err
 	}
 
-	fm, err := os.Open("/proc/modules")
-	if err == nil {
-		defer fm.Close()
-		genLoadedMods(fm, deps)
+	if opts.RootDir == "" || path.Clean(opts.RootDir) == "/" {
+		fm, err := os.Open("/proc/modules")
+		if err == nil {
+			defer fm.Close()
+			genLoadedMods(fm, deps)
+		}
 	}
 
 	return deps, nil
