@@ -51,6 +51,7 @@ func main() {
 	opts := kmodule.ProbeOpts{
 		RootDir: *rootDir,
 		KVer:    *kernelVer,
+		ProcMods: "/proc/modules",
 	}
 	if *dryRun {
 		log.Println("Unique dependencies in load order, already loaded ones get skipped:")
